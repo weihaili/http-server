@@ -45,7 +45,7 @@ public class Server {
 			while ((msg=bf.readLine()).length()>0) {
 				sb.append(msg);
 				sb.append("\r\n");
-				if(null==msg) {
+				if(null==msg) {//此处在post请求时无法获取请求参数
 					break;
 				}
 			}
