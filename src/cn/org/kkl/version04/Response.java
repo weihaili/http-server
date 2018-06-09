@@ -118,7 +118,6 @@ public class Response {
 	
 	private StringBuilder createErrContent(int code) {
 		StringBuilder errInfo = new StringBuilder();
-		
 		switch (code) {
 		case 404:
 			errInfo.append("<html>"

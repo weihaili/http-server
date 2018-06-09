@@ -64,7 +64,7 @@ public class Server {
 					+ "</html>");
 			
 			response=response.println(responseInfo.toString());
-			response.pushToClient(200);
+			response.pushToClient(500);
 			response.close();
 			
 		} catch (IOException e) {
@@ -95,7 +95,7 @@ public class Server {
 			info.append("<html><head><title>kkl web server response</title></head><body>"
 					+ "<h1>welcome liweihai come back</h1></body></html>");
 			response=response.println(info.toString());
-			response.pushToClient(404);
+			response.pushToClient(200);
 			
 			response.close();
 		} catch (IOException e) {
