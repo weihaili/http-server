@@ -15,6 +15,8 @@ public class Server {
 	
 	private Response response;
 	
+	private Request request;
+	
 	public static void main(String[] args) {
 		Server kklServer=new Server();
 		kklServer.start();
@@ -38,20 +40,16 @@ public class Server {
 	}
 
 	private void receive() {
-		byte[] flush=new byte[20480];
 		try {
 			client=server.accept();
-			is=client.getInputStream();
-			int len=is.read(flush);
-			String requestInfo=new String(flush,0,len).trim();
-			System.out.println(requestInfo);
+			request=new Request(client);
 			
 			//response
 			response=new Response(client.getOutputStream());
 			StringBuilder info=new StringBuilder();
 			info.append("<html><head><title>kkl server response</title></head><body><h1>welcome liweihai come back</h1></body></html>");
 			response=response.println(info.toString());
-			response.pushToClient(404);
+			response.pushToClient(200);
 			
 		} catch (IOException e) {
 			System.out.println("server read client reqestInfo exception");

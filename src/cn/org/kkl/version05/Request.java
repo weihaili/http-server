@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,12 @@ public class Request {
 	//?
 	public static final String QUESTION_MARK="?";
 	
+	//&
+	public static final String SINGLE_AND="&";
+	
+	//=
+	public static final String EQUAL_SIGN="=";
+	
 	//request method
 	private String method;
 	
@@ -27,7 +34,7 @@ public class Request {
 	private String url;
 	
 	//request parameter
-	private Map<String, List<String>> parameterMapValues;
+	private Map<String, List<String>> parameterMap;
 	
 	//server get client information
 	private String requestInfo;
@@ -38,7 +45,7 @@ public class Request {
 		method="";
 		url="";
 		requestInfo="";
-		parameterMapValues = new HashMap<String,List<String>>();
+		parameterMap = new HashMap<String,List<String>>();
 	}
 	
 	public Request(InputStream is){
@@ -101,9 +108,39 @@ public class Request {
 			if(urlStr.isEmpty()) {
 				return;
 			}
-			if(urlStr.contains(QUESTION_MARK)) {
-				url=urlStr.substring(0, urlStr.indexOf(QUESTION_MARK));
-				paramStr=urlStr.substring(urlStr.indexOf(QUESTION_MARK));
+			if("get".equalsIgnoreCase(method)) {
+				if(urlStr.contains(QUESTION_MARK)) {
+					url=urlStr.substring(0, urlStr.indexOf(QUESTION_MARK));
+					String tempParams=urlStr.substring(urlStr.indexOf(QUESTION_MARK)+1);
+					String[] paramsArr=tempParams.split(SINGLE_AND);
+					for (String str : paramsArr) {
+						String[] arrTemp=str.split(EQUAL_SIGN);
+						if(!parameterMap.containsKey(arrTemp[0])) {
+							List<String> list=new ArrayList<String>();
+							list.add(arrTemp[1]);
+							parameterMap.put(arrTemp[0], list);
+						}else{
+							List<String> list=parameterMap.get(arrTemp[0]);
+							list.add(arrTemp[1]);
+						}
+					}
+				}
+			}else if("post".equalsIgnoreCase(method)) {
+				String paramsStr=requestInfo.substring(requestInfo.lastIndexOf(CRLF));
+				if(!paramsStr.isEmpty()) {
+					paramsStr.trim();
+					String[] postParams=paramsStr.split(SINGLE_AND);
+					for (String postTemp : postParams) {
+						List<String> list = new ArrayList<String>();
+						String[] postArr=postTemp.split(EQUAL_SIGN);
+						if(parameterMap.containsKey(postArr[0])) {
+							list=parameterMap.get(postArr[0]);
+							list.add(postArr[1]);
+						}
+						list.add(postArr[1]);
+						parameterMap.put(postArr[0], list);
+					}
+				}
 			}
 			url=urlStr;
 		}
