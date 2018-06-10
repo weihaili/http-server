@@ -2,13 +2,10 @@ package cn.org.kkl.version07;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
 
 public class Server {
 	
 	private ServerSocket server;
-	
-	private Socket client;
 	
 	private boolean isShutdown=false;
 	
@@ -16,8 +13,7 @@ public class Server {
 	public static void main(String[] args) {
 		Server kklServer=new Server();
 		kklServer.start();
-		kklServer.stop();
-		System.exit(0);
+		//System.exit(0);
 	}
 	
 	private void stop() {
@@ -42,9 +38,8 @@ public class Server {
 
 	private void receive() {
 		try {
-			client=server.accept();
 			while(!isShutdown) {
-				new Thread(new Dispatcher(client)).start();
+				new Thread(new Dispatcher(server.accept())).start();
 			}
 		} catch (IOException e) {
 			System.out.println("server read client reqestInfo exception");

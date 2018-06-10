@@ -33,10 +33,19 @@ public class Dispatcher implements Runnable {
 
 	@Override
 	public void run() {
-		Servlet servlet=new Servlet();
-		servlet.service(request, response);
-		response.pushToClient(code);
-		
+		try {
+			Servlet servlet=Webapp.getServlet(request.getUrl());
+			if(null==servlet) {
+				this.code=404;//找不到对应的servlet处理类
+			}else {
+				servlet.service(request, response);
+			}
+			response.pushToClient(code);
+		} catch (Exception e) {
+			System.out.println("url corresponding servlet did not found");
+			this.code=500;
+			e.printStackTrace();
+		}
 		IoCloseUtil.closeSeoket(client);
 	}
 

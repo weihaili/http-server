@@ -62,13 +62,12 @@ public class Request {
 		int len=0;
 		try {
 			len = is.read(flush);
-			requestInfo=new String(flush, 0, len).trim();
+			requestInfo=new String(flush, 0, len);
 		} catch (IOException e) {
 			System.out.println("server get client request information exception");
 			e.printStackTrace();
 			return;
 		}
-		
 		paseRequestInfo();
 	}
 
@@ -109,6 +108,7 @@ public class Request {
 		String[] temp=firstLineStr.split(BLANK);
 		method=temp[0];
 		String urlStr=temp[1];
+		url=urlStr;
 		if(method.isEmpty()) {
 			return;
 		}else {
@@ -122,7 +122,6 @@ public class Request {
 				}
 			}else if("post".equalsIgnoreCase(method)) {
 				paramStr=requestInfo.substring(requestInfo.lastIndexOf(CRLF)).trim();
-				url=urlStr;
 			}
 		}
 		if(paramStr.isEmpty()) {
