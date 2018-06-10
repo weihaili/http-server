@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persions>
+	<persion>
+		<name>kkl</name>
+		<age>18</age>
+		<gender>M</gender>
+		<career>IT开发</career>
+	</persion>
+	
+	<persion>
+		<name>至尊宝</name>
+		<age>18</age>
+		<gender>M</gender>
+		<career>演员</career>
+	</persion>
+	
+	<persion>
+		<name>白金金</name>
+		<age>18</age>
+		<gender>F</gender>
+		<career>演员</career>
+	</persion>
+</persions>

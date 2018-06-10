@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<servlet>
+	<name>login</name>
+	<servlet-name>cn.org.kkl.version08.LoginServlet</servlet-name>
+</servlet>
+<mapping>
+	<name>login</name>
+	<url-pattern>/login</url-pattern>
+</mapping>
+<mapping>
+	<name>login</name>
+	<url-pattern>/log</url-pattern>
+</mapping>
+
+<servlet>
+	<name>register</name>
+	<servlet-name>cn.org.kkl.version08.RegisterServlet</servlet-name>
+</servlet>
+<mapping>
+	<name>register</name>
+	<url-pattern>/reg</url-pattern>
+</mapping>
+
+<servlet>
+	<name>serverErr</name>
+	<servlet-name>cn.org.kkl.version08.ServerExceptionServlet</servlet-name>
+</servlet>
+<mapping>
+	<name>serverErr</name>
+	<url-pattern>/serverErr</url-pattern>
+</mapping>
+
+<servlet>
+	<name>notFound</name>
+	<servlet-name>cn.org.kkl.version08.NotFonudServlet</servlet-name>
+</servlet>
+<mapping>
+	<name>notFound</name>
+	<url-pattern>/notFound</url-pattern>
+</mapping>
+
+<servlet>
+	<name>index</name>
+	<servlet-name>cn.org.kkl.version08.IndexServlet</servlet-name>
+</servlet>
+<mapping>
+	<name>index</name>
+	<url-pattern>/index</url-pattern>
+</mapping>
+
