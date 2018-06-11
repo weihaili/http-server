@@ -5,6 +5,7 @@ package cn.org.kkl.version08;
  */
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ServletContext {
@@ -16,7 +17,7 @@ public class ServletContext {
 	
 	public ServletContext() {
 		servlet=new HashMap<String,String>();
-		mapping=new HashMap<String,String>();
+		mapping=new HashMap<String, String>();
 	}
 
 	public Map<String, String> getServlet() {

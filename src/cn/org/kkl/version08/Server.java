@@ -42,7 +42,10 @@ public class Server {
 	private void receive() {
 		try {
 			while(!isShutdown) {
-				new Thread(new Dispatcher(server.accept())).start();
+				Socket client = server.accept();
+				if(null!=client) {
+					new Thread(new Dispatcher(server.accept())).start();
+				}
 			}
 		} catch (IOException e) {
 			System.out.println("server read client reqestInfo exception");
